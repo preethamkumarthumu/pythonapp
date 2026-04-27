@@ -1,8 +1,10 @@
 #!/bin/bash
 set -e
 
-# Pull the Docker image from Docker Hub
-echo
+cd /home/ec2-user/flask-app
 
-# Run the Docker image as a container
-echo
+docker stop flask-container || true
+docker rm flask-container || true
+
+docker build -t flask-app .
+docker run -d -p 80:5000 --name flask-container flask-app
